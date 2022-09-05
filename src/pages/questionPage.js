@@ -11,7 +11,7 @@ import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { SKIP_QUESTION_BUTTON_ID } from '../constants.js';
 import { FINISH_QUIZ_BUTTON_ID } from '../constants.js';
-import { timerIntervalId } from '../views/timerviews.js';
+import { timerIntervalId } from '../views/timerViews.js';
 import { initFinishPage } from './finishPage.js';
 import { createHintElement } from '../views/hintElement.js';
 
@@ -162,10 +162,6 @@ export const initQuestionPage = () => {
     'currentQuestionIndex',
     JSON.stringify(quizData.currentQuestionIndex)
   );
-  // window.sessionStorage.setItem(
-  //   'selected',
-  //   JSON.stringify(quizData.questions[0].selected)
-  // );
   window.sessionStorage.setItem(
     'skippedQuestions',
     JSON.stringify(quizData.skippedQuestions)

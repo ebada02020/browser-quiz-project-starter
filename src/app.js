@@ -1,9 +1,9 @@
 'use strict';
 import { quizData } from './data.js';
 import { initWelcomePage } from './pages/welcomePage.js';
-import { createTimerElement } from './views/timerviews.js';
+import { createTimerElement } from './views/timerViews.js';
 import { initQuestionPage } from './pages/questionPage.js';
-import { setTime } from './views/timerviews.js';
+import { setTime } from './views/timerViews.js';
 import { shuffle } from './pages/utilities.js';
 
 const body = document.body;
@@ -27,9 +27,6 @@ export const loadApp = () => {
 
   let rightAnswers = window.sessionStorage.getItem('rightAnswers');
   quizData.rightAnswers = JSON.parse(rightAnswers) || 0;
-
-  // let selected = window.sessionStorage.getItem('selected');
-  // quizData.questions[0].selected = JSON.parse(selected) || 0;
 
   let totalSeconds = window.sessionStorage.getItem('totalSeconds');
   quizData.totalSeconds = JSON.parse(totalSeconds) || 0;
