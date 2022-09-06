@@ -54,7 +54,7 @@ export const initQuestionPage = () => {
       currentQuestion.selected = right;
       right.style.background = 'green';
       quizData.rightAnswers++;
-      if (quizData.currentQuestionIndex === (quizData.questions.length - 1)) {
+      if (quizData.currentQuestionIndex === (questionsArray.length - 1)) {
         skipQuestion.hidden = true;
         hint.hidden = true;
         finish.style.left = '44.8%';
@@ -70,7 +70,7 @@ export const initQuestionPage = () => {
         wrong[i].style.background = 'red';
         setTimeout(() => { right.style.background = 'green'; }, 500);
         quizData.wrongAnswers++;
-        if (quizData.currentQuestionIndex === (quizData.questions.length - 1)) {
+        if (quizData.currentQuestionIndex === (questionsArray.length - 1)) {
           skipQuestion.hidden = true;
           hint.hidden = true;
           finish.style.left = '44.8%';
@@ -105,7 +105,7 @@ export const initQuestionPage = () => {
 
   const skipQuestion = document.getElementById(SKIP_QUESTION_BUTTON_ID);
   skipQuestion.addEventListener('click', () => {
-    if (quizData.currentQuestionIndex < (quizData.questions.length - 1)) {
+    if (quizData.currentQuestionIndex < (questionsArray.length - 1)) {
       if (currentQuestion.selected === right) {
         currentQuestion.selected = right;
       } else if (currentQuestion.selected === wrong[0] || currentQuestion.selected === wrong[1] || currentQuestion.selected === wrong[2]) {
@@ -134,7 +134,7 @@ export const initQuestionPage = () => {
   });
 
   const finish = document.getElementById(FINISH_QUIZ_BUTTON_ID);
-  if (quizData.currentQuestionIndex < (quizData.questions.length - 1)) {
+  if (quizData.currentQuestionIndex < (questionsArray.length - 1)) {
     finish.style.left = '87%';
   } else {
     toNextQuestion.hidden = true;

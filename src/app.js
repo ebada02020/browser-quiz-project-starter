@@ -17,6 +17,11 @@ export const loadApp = () => {
   const currentQuestionIndex = window.sessionStorage.getItem(
     'currentQuestionIndex'
   );
+
+  console.log(currentQuestionIndex)
+  console.log(typeof currentQuestionIndex)
+
+
   quizData.currentQuestionIndex = JSON.parse(currentQuestionIndex) || 0;
 
   const skippedQuestions = window.sessionStorage.getItem('skippedQuestions');
