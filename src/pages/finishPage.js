@@ -15,7 +15,7 @@ export const initFinishPage = () => {
   if (quizData.rightAnswers > 6) {
     resultMessage.textContent = 'Excellent, well done!';
     resultMessage.style.color = 'green';
-  } else if (quizData.rightAnswers >= 5) {
+  } else if (quizData.rightAnswers === 5) {
     resultMessage.textContent = 'Good, but you might do better';
     resultMessage.style.color = 'orange';
   } else {
@@ -27,5 +27,5 @@ export const initFinishPage = () => {
     .getElementById(START_QUIZ_BUTTON_ID)
     .addEventListener('click', loadApp);
 
-  window.sessionStorage.clear('currentQuestionIndex');
+  window.sessionStorage.clear();
 };
