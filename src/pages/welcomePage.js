@@ -21,9 +21,6 @@ export const initWelcomePage = () => {
 
 export const startQuiz = () => {
   quizData.currentQuestionIndex = 0;
-  // for (let i = 0; i < quizData.questions.length; i++) {
-  //     quizData.questions[i].selected = null;
-  // }
   quizData.rightAnswers = 0;
   quizData.wrongAnswers = 0;
   quizData.skippedQuestions = 0;
