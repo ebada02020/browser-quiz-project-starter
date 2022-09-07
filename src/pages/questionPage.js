@@ -62,8 +62,6 @@ export const initQuestionPage = () => {
 
           quizData.rightAnswers++;
         } else {
-          console.log('wrongAnswer');
-
           answerElement.classList.add('wrong-answer');
           saveSelectedAnswer(currentQuestionIndex, answerElement.id);
           document
@@ -144,14 +142,15 @@ export const initQuestionPage = () => {
 };
 
 const nextQuestion = () => {
-  const currentQuestionIndex = JSON.parse(
-    window.sessionStorage.getItem('currentQuestionIndex')
-  );
   const questionsArray = JSON.parse(
     window.sessionStorage.getItem('questionsArray')
   );
-  const isLastQuestion = currentQuestionIndex === questionsArray.length - 1;
+  const currentQuestionIndex = JSON.parse(
+    window.sessionStorage.getItem('currentQuestionIndex')
+  );
 
+  const isLastQuestion = currentQuestionIndex === questionsArray.length - 1;
+  console.log(!questionsArray[currentQuestionIndex].selected);
   if (!questionsArray[currentQuestionIndex].selected) {
     quizData.skippedQuestions++;
     window.sessionStorage.setItem(

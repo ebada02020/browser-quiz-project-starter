@@ -17,7 +17,7 @@ export const loadApp = () => {
   const isCurrentQuestionIndex = window.sessionStorage.getItem(
     'currentQuestionIndex'
   );
-  
+
   const currentQuestionIndex = JSON.parse(isCurrentQuestionIndex) || 0;
 
   const skippedQuestions = window.sessionStorage.getItem('skippedQuestions');
@@ -42,8 +42,11 @@ export const loadApp = () => {
       JSON.stringify(questionsArrayShuffled)
     );
 
-    window.sessionStorage.setItem('currentQuestionIndex', JSON.stringify(currentQuestionIndex))
-    
+    window.sessionStorage.setItem(
+      'currentQuestionIndex',
+      JSON.stringify(currentQuestionIndex)
+    );
+
     initWelcomePage();
     time.hidden = true;
   }
