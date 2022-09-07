@@ -11,7 +11,7 @@ import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { SKIP_QUESTION_BUTTON_ID } from '../constants.js';
 import { FINISH_QUIZ_BUTTON_ID } from '../constants.js';
-import { timerIntervalId } from '../views/timerViews.js';
+import { timerIntervalId } from './timerPages.js';
 import { initFinishPage } from './finishPage.js';
 import { createHintElement } from '../views/hintElement.js';
 
