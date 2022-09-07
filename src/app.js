@@ -17,8 +17,8 @@ export const loadApp = () => {
   const isCurrentQuestionIndex = window.sessionStorage.getItem(
     'currentQuestionIndex'
   );
-
-  quizData.currentQuestionIndex = JSON.parse(isCurrentQuestionIndex) || 0;
+  
+  const currentQuestionIndex = JSON.parse(isCurrentQuestionIndex) || 0;
 
   const skippedQuestions = window.sessionStorage.getItem('skippedQuestions');
   quizData.skippedQuestions = JSON.parse(skippedQuestions) || 0;
@@ -41,9 +41,9 @@ export const loadApp = () => {
       'questionsArray',
       JSON.stringify(questionsArrayShuffled)
     );
-    window.sessionStorage.setItem('currentQuestionIndex', JSON.stringify(0))
 
-
+    window.sessionStorage.setItem('currentQuestionIndex', JSON.stringify(currentQuestionIndex))
+    
     initWelcomePage();
     time.hidden = true;
   }

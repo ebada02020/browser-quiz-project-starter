@@ -23,13 +23,14 @@ export const initQuestionPage = () => {
   const questionsArray = JSON.parse(
     window.sessionStorage.getItem('questionsArray')
   );
-  const currentQuestionIndex = JSON.parse(window.sessionStorage.getItem('currentQuestionIndex'));
+
+  const currentQuestionIndex = JSON.parse(
+    window.sessionStorage.getItem('currentQuestionIndex')
+  );
   const currentQuestion = questionsArray[currentQuestionIndex];
 
   const amount = questionsArray.length;
-  const questionNumber = `Question [ ${
-    currentQuestionIndex + 1
-  } / ${amount} ]`;
+  const questionNumber = `Question [ ${currentQuestionIndex + 1} / ${amount} ]`;
   const score = `Score &nbsp&nbsp [ ${quizData.rightAnswers} / ${amount} ]`;
   const wrongAnswer = `&nbspWrong &nbsp [ ${quizData.wrongAnswers} / ${amount} ]`;
   const skipped = `Skipped [ ${quizData.skippedQuestions} / ${amount} ]`;
@@ -53,50 +54,42 @@ export const initQuestionPage = () => {
 
     const checkAnswer = () => {
       if (questionsArray[currentQuestionIndex].selected === null) {
-        if (
-          answerElement.id ===
-          questionsArray[currentQuestionIndex].correct
-        ) {
-          answerElement.style.background = 'green';
-
-          questionsArray[currentQuestionIndex].selected =
-            answerElement.id;
-
-
+        if (answerElement.id === questionsArray[currentQuestionIndex].correct) {
+          console.log('rightAnswers');
+          answerElement.classList.add('right-answer');
           saveSelectedAnswer(currentQuestionIndex, answerElement.id);
+
+          questionsArray[currentQuestionIndex].selected = answerElement.id;
 
           quizData.rightAnswers++;
         } else {
-          questionsArray[currentQuestionIndex].selected =
-            answerElement.id;
+          console.log('wrongAnswer');
 
-            questionsArray[currentQuestionIndex].selected =
-            answerElement.id;
-
-          answerElement.style.background = 'red';
-          document.getElementById(
-            questionsArray[currentQuestionIndex].correct
-          ).style.background = 'green';
-
-
+          answerElement.classList.add('wrong-answer');
           saveSelectedAnswer(currentQuestionIndex, answerElement.id);
+          document
+            .getElementById(questionsArray[currentQuestionIndex].correct)
+            .classList.add('right-answer');
+          questionsArray[currentQuestionIndex].selected = answerElement.id;
 
           quizData.wrongAnswers++;
         }
       } else {
-        if (questionsArray[currentQuestionIndex].correct === questionsArray[currentQuestionIndex].selected) {
-          document.getElementById(questionsArray[currentQuestionIndex].correct).style.background = 'green';
-
-
+        if (
+          questionsArray[currentQuestionIndex].correct ===
+          questionsArray[currentQuestionIndex].selected
+        ) {
+          document
+            .getElementById(questionsArray[currentQuestionIndex].correct)
+            .classList.add('right-answer');
         } else {
-          document.getElementById(questionsArray[currentQuestionIndex].correct).style.background = 'green';
-
-          document.getElementById(questionsArray[currentQuestionIndex].selected).style.background = 'red';
-
+          document
+            .getElementById(questionsArray[currentQuestionIndex].correct)
+            .classList.add('right-answer');
+          document
+            .getElementById(questionsArray[currentQuestionIndex].selected)
+            .classList.add('wrong-answer');
         }
-
-
-
       }
     };
 
@@ -114,12 +107,12 @@ export const initQuestionPage = () => {
 
   window.sessionStorage.setItem(
     'currentQuestionIndex',
-    JSON.stringify(quizData.currentQuestionIndex)
+    JSON.stringify(currentQuestionIndex + 1)
   );
-  // window.sessionStorage.setItem(
-  //   'skippedQuestions',
-  //   JSON.stringify(quizData.skippedQuestions)
-  // );
+  window.sessionStorage.setItem(
+    'skippedQuestions',
+    JSON.stringify(quizData.skippedQuestions)
+  );
   window.sessionStorage.setItem(
     'wrongAnswers',
     JSON.stringify(quizData.wrongAnswers)
@@ -132,28 +125,27 @@ export const initQuestionPage = () => {
 };
 
 const nextQuestion = () => {
-
+  const currentQuestionIndex = JSON.parse(
+    window.sessionStorage.getItem('currentQuestionIndex')
+  );
   const questionsArray = JSON.parse(
     window.sessionStorage.getItem('questionsArray')
   );
-  let currentQuestionIndex = JSON.parse(window.sessionStorage.getItem('currentQuestionIndex'));
+  const isLastQuestion = currentQuestionIndex === questionsArray.length - 1;
 
-  const lastQuestion =
-    currentQuestionIndex === questionsArray.length - 1;
-  
   if (!questionsArray[currentQuestionIndex].selected) {
-
-    window.sessionStorage.setItem('skippedQuestions', JSON.stringify(quizData.skippedQuestions++))
-
-    window.sessionStorage.setItem('currentQuestionIndex', JSON.stringify(quizData.currentQuestionIndex++))
-
-    window.sessionStorage.setItem('currentQuestionIndex', JSON.stringify(quizData.currentQuestionIndex++))
-
-
-    lastQuestion ? initFinishPage() : initQuestionPage();
+    quizData.skippedQuestions++;
+    window.sessionStorage.setItem(
+      'currentQuestionIndex',
+      JSON.stringify(currentQuestionIndex)
+    );
+    isLastQuestion ? initFinishPage() : initQuestionPage();
   } else {
-    window.sessionStorage.setItem('currentQuestionIndex', JSON.stringify(quizData.currentQuestionIndex++))
+    window.sessionStorage.setItem(
+      'currentQuestionIndex',
+      JSON.stringify(currentQuestionIndex)
+    );
 
-    lastQuestion ? initFinishPage() : initQuestionPage();
+    isLastQuestion ? initFinishPage() : initQuestionPage();
   }
 };
