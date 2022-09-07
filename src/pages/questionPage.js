@@ -5,13 +5,12 @@ import {
   NEXT_QUESTION_BUTTON_ID,
   USER_INTERFACE_ID,
   HINT_QUIZ_BUTTON_ID,
+  CLOSE_ELEMENT_ID,
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
-import { SKIP_QUESTION_BUTTON_ID } from '../constants.js';
 import { FINISH_QUIZ_BUTTON_ID } from '../constants.js';
-import { timerIntervalId } from './timerPages.js';
 import { initFinishPage } from './finishPage.js';
 import { createHintElement } from '../views/hintElement.js';
 import { saveSelectedAnswer } from './utilities.js';
@@ -99,6 +98,26 @@ export const initQuestionPage = () => {
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
     .addEventListener('click', nextQuestion);
+
+  const hint = document.getElementById(HINT_QUIZ_BUTTON_ID);
+  const initHint = () => {
+    const hintDiv = createHintElement(
+      currentQuestion.explanation,
+      currentQuestion.links[0].text,
+      currentQuestion.links[0].href
+    );
+    userInterface.appendChild(hintDiv);
+
+    const hintHidden = () => {
+      hintDiv.hidden = true;
+    };
+
+    document
+      .getElementById(CLOSE_ELEMENT_ID)
+      .addEventListener('click', hintHidden);
+  };
+
+  hint.addEventListener('click', initHint);
 
   const finish = document.getElementById(FINISH_QUIZ_BUTTON_ID);
   finish.style.left = '60%';

@@ -26,6 +26,6 @@ export const startQuiz = () => {
   quizData.skippedQuestions = 0;
   initQuestionPage();
   time.hidden = false;
-  resetTotalSeconds()
+  resetTotalSeconds();
   setTime(true);
 };
