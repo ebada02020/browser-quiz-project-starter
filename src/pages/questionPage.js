@@ -149,21 +149,23 @@ const nextQuestion = () => {
     window.sessionStorage.getItem('currentQuestionIndex')
   );
 
-  const isLastQuestion = currentQuestionIndex === questionsArray.length - 1;
-  console.log(!questionsArray[currentQuestionIndex].selected);
-  if (!questionsArray[currentQuestionIndex].selected) {
-    quizData.skippedQuestions++;
-    window.sessionStorage.setItem(
-      'currentQuestionIndex',
-      JSON.stringify(currentQuestionIndex)
-    );
-    isLastQuestion ? initFinishPage() : initQuestionPage();
-  } else {
+  if (currentQuestionIndex <= questionsArray.length - 1) {
+    if (questionsArray[currentQuestionIndex].selected) {
+    } else {
+      quizData.skippedQuestions++;
+
+      document.getElementById(questionsArray[currentQuestionIndex].correct)
+      .style.background = 'blue';
+
+    }
+
     window.sessionStorage.setItem(
       'currentQuestionIndex',
       JSON.stringify(currentQuestionIndex)
     );
 
-    isLastQuestion ? initFinishPage() : initQuestionPage();
+    initQuestionPage();
+  } else {
+    initFinishPage();
   }
 };

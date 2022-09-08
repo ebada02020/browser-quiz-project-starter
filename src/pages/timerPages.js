@@ -12,14 +12,14 @@ function increaseTimer() {
     'totalSeconds',
     JSON.stringify(quizData.totalSeconds)
   );
-  let minutes = document.getElementById('minutes');
+  const minutes = document.getElementById('minutes');
   minutes.innerHTML = pad(quizData.totalSeconds % 60);
-  let seconds = document.getElementById('seconds');
+  const seconds = document.getElementById('seconds');
   seconds.innerHTML = pad(parseInt(quizData.totalSeconds / 60));
 }
 
 function pad(val) {
-  let valString = val + '';
+  const valString = val + '';
   if (valString.length < 2) {
     return '0' + valString;
   } else {
