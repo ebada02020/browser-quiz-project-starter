@@ -153,10 +153,9 @@ const nextQuestion = () => {
     if (questionsArray[currentQuestionIndex].selected) {
     } else {
       quizData.skippedQuestions++;
-
-      document.getElementById(questionsArray[currentQuestionIndex].correct)
-      .style.background = 'blue';
-
+      document.getElementById(
+        questionsArray[currentQuestionIndex].correct
+      ).style.background = 'blue';
     }
 
     window.sessionStorage.setItem(
