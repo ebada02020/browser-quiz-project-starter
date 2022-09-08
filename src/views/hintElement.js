@@ -1,3 +1,5 @@
+'use strict';
+
 export const createHintElement = (explain, text, href) => {
   const element = document.createElement('p');
 

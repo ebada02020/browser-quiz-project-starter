@@ -1,3 +1,5 @@
+'use strict';
+
 export const shuffle = (array) => {
   let current = array.length;
   let temp;

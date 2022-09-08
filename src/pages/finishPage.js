@@ -1,3 +1,5 @@
+'use strict';
+
 import { quizData } from '../data.js';
 import { START_QUIZ_BUTTON_ID } from '../constants.js';
 import { createFinishElement } from '../views/finishViews.js';

@@ -1,3 +1,5 @@
+'use strict';
+
 import { quizData } from '../data.js';
 
 export let timerIntervalId = 0;

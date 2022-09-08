@@ -1,3 +1,5 @@
+'use strict';
+
 import { TIMER_Id } from '../constants.js';
 
 export const createTimerElement = () => {
