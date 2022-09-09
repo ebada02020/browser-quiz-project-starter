@@ -13,7 +13,8 @@ export const initFinishPage = () => {
   const finishElement = createFinishElement();
   userInterface.appendChild(finishElement);
 
-  let rightAnswers = JSON.parse(window.sessionStorage.getItem('rightAnswers')) || 0;
+  let rightAnswers =
+    JSON.parse(window.sessionStorage.getItem('rightAnswers')) || 0;
 
   const resultMessage = document.getElementById('result-message');
   if (rightAnswers > 6) {

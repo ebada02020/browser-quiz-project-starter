@@ -4,12 +4,13 @@ import { START_QUIZ_BUTTON_ID } from '../constants.js';
 import { quizData } from '../data.js';
 
 export const createFinishElement = () => {
+  let wrongAnswers =
+    JSON.parse(window.sessionStorage.getItem('wrongAnswers')) || 0;
 
-  let wrongAnswers = JSON.parse(window.sessionStorage.getItem('wrongAnswers')) || 0;
-
-  let rightAnswers = JSON.parse(window.sessionStorage.getItem('rightAnswers')) || 0;
-  let skippedQuestions = JSON.parse(
-    window.sessionStorage.getItem('skippedQuestions')) || 0;
+  let rightAnswers =
+    JSON.parse(window.sessionStorage.getItem('rightAnswers')) || 0;
+  let skippedQuestions =
+    JSON.parse(window.sessionStorage.getItem('skippedQuestions')) || 0;
 
   const element = document.createElement('div');
   element.style.width = '60rem';

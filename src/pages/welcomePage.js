@@ -4,7 +4,6 @@ import { USER_INTERFACE_ID, START_QUIZ_BUTTON_ID } from '../constants.js';
 import { createWelcomeElement } from '../views/welcomeView.js';
 import { initQuestionPage } from './questionPage.js';
 import { setTime, resetTotalSeconds } from './timerPages.js';
-import { quizData } from '../data.js';
 import { time } from '../app.js';
 
 export const initWelcomePage = () => {
