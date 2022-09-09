@@ -19,6 +19,10 @@ export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
 
+
+
+
+  
   const questionsArray = JSON.parse(
     window.sessionStorage.getItem('questionsArray')
   );
@@ -26,6 +30,7 @@ export const initQuestionPage = () => {
   const currentQuestionIndex = JSON.parse(
     window.sessionStorage.getItem('currentQuestionIndex')
   );
+  
   const currentQuestion = questionsArray[currentQuestionIndex];
 
 
@@ -77,9 +82,10 @@ export const initQuestionPage = () => {
       if (questionsArray[currentQuestionIndex].selected === null) {
         if (answerElement.id === questionsArray[currentQuestionIndex].correct) {
           answerElement.classList.add('right-answer');
-          saveSelectedAnswer(currentQuestionIndex, answerElement.id);
 
           questionsArray[currentQuestionIndex].selected = answerElement.id;
+          saveSelectedAnswer(currentQuestionIndex, answerElement.id);
+
 
           rightAnswers++;
           window.sessionStorage.setItem(
@@ -89,11 +95,12 @@ export const initQuestionPage = () => {
 
         } else {
           answerElement.classList.add('wrong-answer');
-          saveSelectedAnswer(currentQuestionIndex, answerElement.id);
           document
             .getElementById(questionsArray[currentQuestionIndex].correct)
             .classList.add('right-answer');
           questionsArray[currentQuestionIndex].selected = answerElement.id;
+          saveSelectedAnswer(currentQuestionIndex, answerElement.id);
+
 
           wrongAnswers++;
           
@@ -223,39 +230,44 @@ const nextQuestion = () => {
 
 
 
-  
-
-
-
-
+  if (questionsArray[currentQuestionIndex].selected === null) {
+    console.log(questionsArray[currentQuestionIndex].selected)
+    skippedQuestions++
+    window.sessionStorage.setItem(
+      'skippedQuestions',
+      JSON.stringify(skippedQuestions)
+    );
+  }
   currentQuestionIndex++;
 
 
-
+  window.sessionStorage.setItem(
+    'currentQuestionIndex',
+    JSON.stringify(currentQuestionIndex)
+  );
 
   if (currentQuestionIndex <= questionsArray.length - 1) {
-
-    if (questionsArray[currentQuestionIndex].selected === null) {
-      console.log(questionsArray[currentQuestionIndex].selected)
-      skippedQuestions++
-      window.sessionStorage.setItem(
-        'skippedQuestions',
-        JSON.stringify(skippedQuestions)
-      );
-    }
-
-
-
-
-
-
-    window.sessionStorage.setItem(
-      'currentQuestionIndex',
-      JSON.stringify(currentQuestionIndex)
-    );
-
     initQuestionPage();
+
   } else {
     initFinishPage();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
