@@ -87,7 +87,27 @@ export const initQuestionPage = () => {
             JSON.stringify(wrongAnswers)
           );
         }
+      } else {
+        if (
+          questionsArray[currentQuestionIndex].correct ===
+          questionsArray[currentQuestionIndex].selected
+        ) {
+          document
+            .getElementById(questionsArray[currentQuestionIndex].correct)
+            .classList.add('right-answer');
+        } else {
+          document
+            .getElementById(questionsArray[currentQuestionIndex].correct)
+            .classList.add('right-answer');
+          document
+            .getElementById(questionsArray[currentQuestionIndex].selected)
+            .classList.add('wrong-answer');
+        }
       }
+
+
+
+
     };
 
     answerElement.addEventListener('click', checkAnswer);
