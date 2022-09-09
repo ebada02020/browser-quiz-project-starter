@@ -20,9 +20,6 @@ export const initWelcomePage = () => {
 };
 
 export const startQuiz = () => {
-  quizData.rightAnswers = 0;
-  quizData.wrongAnswers = 0;
-  quizData.skippedQuestions = 0;
   initQuestionPage();
   time.hidden = false;
   resetTotalSeconds();

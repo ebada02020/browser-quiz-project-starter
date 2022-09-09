@@ -28,11 +28,21 @@ export const initQuestionPage = () => {
   );
   const currentQuestion = questionsArray[currentQuestionIndex];
 
+
+   let wrongAnswers = JSON.parse(window.sessionStorage.getItem('wrongAnswers')) || 0;
+
+   let rightAnswers = JSON.parse(window.sessionStorage.getItem('rightAnswers')) || 0;
+   let skippedQuestions = JSON.parse(
+    window.sessionStorage.getItem('skippedQuestions')) || 0;
+
+
+
+
   const amount = questionsArray.length;
   const questionNumber = `Question [ ${currentQuestionIndex + 1} / ${amount} ]`;
-  const score = `Score &nbsp&nbsp [ ${quizData.rightAnswers} / ${amount} ]`;
-  const wrongAnswer = `&nbspWrong &nbsp [ ${quizData.wrongAnswers} / ${amount} ]`;
-  const skipped = `Skipped [ ${quizData.skippedQuestions} / ${amount} ]`;
+  const score = `Score &nbsp&nbsp [ ${rightAnswers} / ${amount} ]`;
+  const wrongAnswer = `&nbspWrong &nbsp [ ${wrongAnswers} / ${amount} ]`;
+  const skipped = `Skipped [ ${skippedQuestions} / ${amount} ]`;
 
   const questionElement = createQuestionElement(
     currentQuestion.text,
@@ -52,15 +62,31 @@ export const initQuestionPage = () => {
     answersListElement.appendChild(answerElement);
 
     const checkAnswer = () => {
+
+
+
+
+
+
+
+
+
+
+
+
       if (questionsArray[currentQuestionIndex].selected === null) {
         if (answerElement.id === questionsArray[currentQuestionIndex].correct) {
-          console.log('rightAnswers');
           answerElement.classList.add('right-answer');
           saveSelectedAnswer(currentQuestionIndex, answerElement.id);
 
           questionsArray[currentQuestionIndex].selected = answerElement.id;
 
-          quizData.rightAnswers++;
+          rightAnswers++;
+          window.sessionStorage.setItem(
+            'rightAnswers',
+            JSON.stringify(rightAnswers)
+          );
+
         } else {
           answerElement.classList.add('wrong-answer');
           saveSelectedAnswer(currentQuestionIndex, answerElement.id);
@@ -69,29 +95,55 @@ export const initQuestionPage = () => {
             .classList.add('right-answer');
           questionsArray[currentQuestionIndex].selected = answerElement.id;
 
-          quizData.wrongAnswers++;
-        }
-      } else {
-        if (
-          questionsArray[currentQuestionIndex].correct ===
-          questionsArray[currentQuestionIndex].selected
-        ) {
-          document
-            .getElementById(questionsArray[currentQuestionIndex].correct)
-            .classList.add('right-answer');
-        } else {
-          document
-            .getElementById(questionsArray[currentQuestionIndex].correct)
-            .classList.add('right-answer');
-          document
-            .getElementById(questionsArray[currentQuestionIndex].selected)
-            .classList.add('wrong-answer');
+          wrongAnswers++;
+          
+          window.sessionStorage.setItem(
+            'wrongAnswers',
+            JSON.stringify(wrongAnswers)
+          );
+        
+
+
         }
       }
+      
+      
+      // else {
+
+      //   skippedQuestions++;
+      //   window.sessionStorage.setItem(
+      //     'skippedQuestions',
+      //     JSON.stringify(skippedQuestions)
+      //   );
+        
+      // }
+      
+      
+      // else {
+      //   if (
+      //     questionsArray[currentQuestionIndex].correct ===
+      //     questionsArray[currentQuestionIndex].selected
+      //   ) {
+      //     document
+      //       .getElementById(questionsArray[currentQuestionIndex].correct)
+      //       .classList.add('right-answer');
+      //   } else {
+      //     document
+      //       .getElementById(questionsArray[currentQuestionIndex].correct)
+      //       .classList.add('right-answer');
+      //     document
+      //       .getElementById(questionsArray[currentQuestionIndex].selected)
+      //       .classList.add('wrong-answer');
+      //   }
+      // }
+
     };
 
     answerElement.addEventListener('click', checkAnswer);
   }
+
+
+
 
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
@@ -109,6 +161,7 @@ export const initQuestionPage = () => {
     const hintHidden = () => {
       hintDiv.hidden = true;
     };
+    
 
     document
       .getElementById(CLOSE_ELEMENT_ID)
@@ -122,41 +175,79 @@ export const initQuestionPage = () => {
 
   finish.addEventListener('click', initFinishPage);
 
-  window.sessionStorage.setItem(
-    'currentQuestionIndex',
-    JSON.stringify(currentQuestionIndex + 1)
-  );
-  window.sessionStorage.setItem(
-    'skippedQuestions',
-    JSON.stringify(quizData.skippedQuestions)
-  );
-  window.sessionStorage.setItem(
-    'wrongAnswers',
-    JSON.stringify(quizData.wrongAnswers)
-  );
 
-  window.sessionStorage.setItem(
-    'rightAnswers',
-    JSON.stringify(quizData.rightAnswers)
-  );
+
 };
 
 const nextQuestion = () => {
   const questionsArray = JSON.parse(
     window.sessionStorage.getItem('questionsArray')
   );
-  const currentQuestionIndex = JSON.parse(
+
+  let currentQuestionIndex = JSON.parse(
     window.sessionStorage.getItem('currentQuestionIndex')
   );
 
+
+  let skippedQuestions = JSON.parse(
+    window.sessionStorage.getItem('skippedQuestions')) || 0;
+
+
+
+
+  // if (questionsArray[currentQuestionIndex].selected) {
+
+  //   currentQuestionIndex++;
+
+
+  // } else {
+  //   skippedQuestions++
+  //   currentQuestionIndex++;
+
+  // }
+
+
+
+
+
+
+
+
+
+  // window.sessionStorage.setItem(
+  //   'currentQuestionIndex',
+  //   JSON.stringify(currentQuestionIndex)
+  // );
+
+
+
+
+
+  
+
+
+
+
+  currentQuestionIndex++;
+
+
+
+
   if (currentQuestionIndex <= questionsArray.length - 1) {
-    if (questionsArray[currentQuestionIndex].selected) {
-    } else {
-      quizData.skippedQuestions++;
-      document.getElementById(
-        questionsArray[currentQuestionIndex].correct
-      ).style.background = 'blue';
+
+    if (questionsArray[currentQuestionIndex].selected === null) {
+      console.log(questionsArray[currentQuestionIndex].selected)
+      skippedQuestions++
+      window.sessionStorage.setItem(
+        'skippedQuestions',
+        JSON.stringify(skippedQuestions)
+      );
     }
+
+
+
+
+
 
     window.sessionStorage.setItem(
       'currentQuestionIndex',
