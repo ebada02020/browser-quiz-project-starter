@@ -104,10 +104,6 @@ export const initQuestionPage = () => {
             .classList.add('wrong-answer');
         }
       }
-
-
-
-
     };
 
     answerElement.addEventListener('click', checkAnswer);
