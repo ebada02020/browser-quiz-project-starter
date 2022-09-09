@@ -1,9 +1,10 @@
 'use strict';
+
 import { quizData } from './data.js';
 import { initWelcomePage } from './pages/welcomePage.js';
 import { createTimerElement } from './views/timerViews.js';
 import { initQuestionPage } from './pages/questionPage.js';
-import { setTime } from './views/timerViews.js';
+import { setTime } from './pages/timerPages.js';
 import { shuffle } from './pages/utilities.js';
 
 const body = document.body;
@@ -14,10 +15,11 @@ time.style.left = '49.3%';
 body.appendChild(time);
 
 export const loadApp = () => {
-  const currentQuestionIndex = window.sessionStorage.getItem(
+  const isCurrentQuestionIndex = window.sessionStorage.getItem(
     'currentQuestionIndex'
   );
-  quizData.currentQuestionIndex = JSON.parse(currentQuestionIndex) || 0;
+
+  const currentQuestionIndex = JSON.parse(isCurrentQuestionIndex) || 0;
 
   const skippedQuestions = window.sessionStorage.getItem('skippedQuestions');
   quizData.skippedQuestions = JSON.parse(skippedQuestions) || 0;
@@ -31,7 +33,7 @@ export const loadApp = () => {
   const totalSeconds = window.sessionStorage.getItem('totalSeconds');
   quizData.totalSeconds = JSON.parse(totalSeconds) || 0;
 
-  if (currentQuestionIndex) {
+  if (isCurrentQuestionIndex) {
     initQuestionPage();
     setTime(true);
   } else {
@@ -40,6 +42,12 @@ export const loadApp = () => {
       'questionsArray',
       JSON.stringify(questionsArrayShuffled)
     );
+
+    window.sessionStorage.setItem(
+      'currentQuestionIndex',
+      JSON.stringify(currentQuestionIndex)
+    );
+
     initWelcomePage();
     time.hidden = true;
   }

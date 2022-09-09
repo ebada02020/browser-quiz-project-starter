@@ -1,3 +1,5 @@
+'use strict';
+
 import { quizData } from '../data.js';
 import { START_QUIZ_BUTTON_ID } from '../constants.js';
 import { createFinishElement } from '../views/finishViews.js';
@@ -11,11 +13,14 @@ export const initFinishPage = () => {
   const finishElement = createFinishElement();
   userInterface.appendChild(finishElement);
 
+  let rightAnswers =
+    JSON.parse(window.sessionStorage.getItem('rightAnswers')) || 0;
+
   const resultMessage = document.getElementById('result-message');
-  if (quizData.rightAnswers > 6) {
+  if (rightAnswers > 6) {
     resultMessage.textContent = 'Excellent, well done!';
     resultMessage.style.color = 'green';
-  } else if (quizData.rightAnswers >= 5) {
+  } else if (rightAnswers === 5) {
     resultMessage.textContent = 'Good, but you might do better';
     resultMessage.style.color = 'orange';
   } else {
@@ -27,5 +32,5 @@ export const initFinishPage = () => {
     .getElementById(START_QUIZ_BUTTON_ID)
     .addEventListener('click', loadApp);
 
-  window.sessionStorage.clear('currentQuestionIndex');
+  window.sessionStorage.clear();
 };

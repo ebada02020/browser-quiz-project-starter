@@ -27,7 +27,6 @@ export const createQuestionElement = (question, current, good, bad, skip) => {
       <ul id="${ANSWERS_LIST_ID}"></ul>
       <hr>
       <button id="${NEXT_QUESTION_BUTTON_ID}">Next question</button>
-      <button id="${SKIP_QUESTION_BUTTON_ID}">Skip question</button>
       <button id="${FINISH_QUIZ_BUTTON_ID}">Finish</button>
       <button id="${HINT_QUIZ_BUTTON_ID}">Hint</button>`;
   return element;

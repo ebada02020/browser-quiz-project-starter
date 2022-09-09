@@ -1,0 +1,9 @@
+.wrong-answer {
+    transform: scale(1.1);
+    background-color: red;
+   }
+   
+   .right-answer {
+    transform: scale(1.1);
+    background-color: green;
+   }

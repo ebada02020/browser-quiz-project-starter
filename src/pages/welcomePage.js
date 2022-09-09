@@ -3,8 +3,7 @@
 import { USER_INTERFACE_ID, START_QUIZ_BUTTON_ID } from '../constants.js';
 import { createWelcomeElement } from '../views/welcomeView.js';
 import { initQuestionPage } from './questionPage.js';
-import { setTime, resetTotalSeconds } from '../views/timerViews.js';
-import { quizData } from '../data.js';
+import { setTime, resetTotalSeconds } from './timerPages.js';
 import { time } from '../app.js';
 
 export const initWelcomePage = () => {
@@ -20,15 +19,8 @@ export const initWelcomePage = () => {
 };
 
 export const startQuiz = () => {
-  quizData.currentQuestionIndex = 0;
-  // for (let i = 0; i < quizData.questions.length; i++) {
-  //     quizData.questions[i].selected = null;
-  // }
-  quizData.rightAnswers = 0;
-  quizData.wrongAnswers = 0;
-  quizData.skippedQuestions = 0;
   initQuestionPage();
   time.hidden = false;
-  resetTotalSeconds()
+  resetTotalSeconds();
   setTime(true);
 };
