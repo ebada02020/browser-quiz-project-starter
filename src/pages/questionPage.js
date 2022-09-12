@@ -61,11 +61,11 @@ export const initQuestionPage = () => {
 
     const checkAnswer = () => {
       if (questionsArray[currentQuestionIndex].selected === null) {
+        questionsArray[currentQuestionIndex].selected = answerElement.id;
+        saveSelectedAnswer(currentQuestionIndex, answerElement.id);
+
         if (answerElement.id === questionsArray[currentQuestionIndex].correct) {
           answerElement.classList.add('right-answer');
-
-          questionsArray[currentQuestionIndex].selected = answerElement.id;
-          saveSelectedAnswer(currentQuestionIndex, answerElement.id);
 
           rightAnswers++;
           window.sessionStorage.setItem(
@@ -77,8 +77,6 @@ export const initQuestionPage = () => {
           document
             .getElementById(questionsArray[currentQuestionIndex].correct)
             .classList.add('right-answer');
-          questionsArray[currentQuestionIndex].selected = answerElement.id;
-          saveSelectedAnswer(currentQuestionIndex, answerElement.id);
 
           wrongAnswers++;
 
@@ -152,7 +150,6 @@ const nextQuestion = () => {
     JSON.parse(window.sessionStorage.getItem('skippedQuestions')) || 0;
 
   if (questionsArray[currentQuestionIndex].selected === null) {
-    console.log(questionsArray[currentQuestionIndex].selected);
     skippedQuestions++;
     window.sessionStorage.setItem(
       'skippedQuestions',
